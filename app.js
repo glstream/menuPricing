@@ -2,8 +2,10 @@ const request = require('request');
 const yargs = require('yargs');
 const geoCode = require('./geocode/geocode');
 const weather = require('./weather/weather');
-const menu = require('./menu/latte');
 const express = require('express');
+// self made 
+const menu = require('./menu/latte');
+const { MongoClient, ObjectID } = require('mongodb');
 
 var app = express();
 const port = process.env.PORT || 3000;
@@ -29,12 +31,68 @@ geoCode.geoCodeAddress(argv.address, (errorMessage, results) => {
             if (errorMessage) {
                 console.log(errorMessage);
             } else {
-                menu.latte(weatherResults.temperature, (errorMessage, menuResults) => {
+                menu.latte(weatherResults.temperature, (errorMessage, latteResults) => {
                      if (errorMessage) {
                     console.log(errorMessage);
                      } else {
+                         app.get('/', (req, res)=> {
+                             res.send(`It's currently ${weatherResults.temperature} degress with a apparent temperature of ${weatherResults.apparentTemperature}.
+                                        The price of a Coffee is Currenty: ${latteResults.price}`)
+                         })
                          console.log(`It's currently ${weatherResults.temperature} degress with a apparent temperature of ${weatherResults.apparentTemperature}.`);
-                         console.log(`The price of a Latte is Currenty: ${menuResults.price}`)
+                         console.log(`The price of a Latte is Currenty: ${latteResults.price}`)
+                     }
+                MongoClient.connect('mongodb://localhost:27017/menu', (err, db)=>{
+                        if (err) {
+                            return console.log('Unable to connect to Mongodb Server');
+                        }
+                        console.log('Connected to Mongo DB server');
+
+                    db.collection('category').updateMany({
+                            product: 'Iced Coffee'
+                                }, {
+                            $set: {
+                                price: latteResults.price
+                                }
+                            }, {
+                            returnOriginal: false
+                        }).then((result) => {
+                            console.log(result.matchedCount);
+                        })
+                    db.close();
+                })
+                      
+                })
+    
+            }
+        });
+    }
+});
+
+
+
+
+
+
+
+
+geoCode.geoCodeAddress(argv.address, (errorMessage, results) => {
+    if (errorMessage) {
+        console.log(errorMessage)
+    } else {
+         weather.getWeather(results.lat, results.long, (errorMessage, weatherResults) => {
+            if (errorMessage) {
+                console.log(errorMessage);
+            } else {
+                menu.coffee(weatherResults.temperature, (errorMessage, coffeeResults) => {
+                     if (errorMessage) {
+                    console.log(errorMessage);
+                     } else {
+                         app.get('/a', (req, res)=> {
+                             res.send(`It's currently ${weatherResults.temperature} degress with a apparent temperature of ${weatherResults.apparentTemperature}.
+                                        The price of a Coffee is Currenty: ${coffeeResults.price}`)
+                         })
+                         console.log(`The price of a Coffee is Currenty: ${coffeeResults.price}`)
                      }
                 })
     
@@ -42,6 +100,8 @@ geoCode.geoCodeAddress(argv.address, (errorMessage, results) => {
         });
     }
 });
+
+
 
 // menu.latte(5.01, (errorMessage, results) => {
 //     console.log('latte')
@@ -58,6 +118,6 @@ geoCode.geoCodeAddress(argv.address, (errorMessage, results) => {
 //     res.send()
 //  });
 
-// app.listen(port, () => {
-//   console.log(`Started up at port ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Started up at port ${port}`);
+});
