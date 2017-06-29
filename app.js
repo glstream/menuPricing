@@ -3,6 +3,7 @@ const yargs = require('yargs');
 const geoCode = require('./geocode/geocode');
 const weather = require('./weather/weather');
 const express = require('express');
+var cron = require('node-cron');
 // self made 
 const menu = require('./menu/latte');
 const { MongoClient, ObjectID } = require('mongodb');
@@ -10,20 +11,12 @@ const { MongoClient, ObjectID } = require('mongodb');
 var app = express();
 const port = process.env.PORT || 3000;
 
-const argv = yargs.options({
-        a: {
-            demand: true,
-            alias: 'address',
-            describe: 'Address to fetch weather for',
-            string:true
-        }
-
-}).help()
-    .alias('help', 'h')
-    .argv;
 
 
-geoCode.geoCodeAddress(argv.address, (errorMessage, results) => {
+
+cron.schedule('* * * * *', function(){
+zip = '85001'
+    geoCode.geoCodeAddress(zip, (errorMessage, results) => {
     if (errorMessage) {
         console.log(errorMessage)
     } else {
@@ -76,7 +69,7 @@ geoCode.geoCodeAddress(argv.address, (errorMessage, results) => {
 
 
 
-geoCode.geoCodeAddress(argv.address, (errorMessage, results) => {
+geoCode.geoCodeAddress(zip, (errorMessage, results) => {
     if (errorMessage) {
         console.log(errorMessage)
     } else {
@@ -120,6 +113,11 @@ geoCode.geoCodeAddress(argv.address, (errorMessage, results) => {
         });
     }
 });
+  
+});
+
+
+
 
 
 
