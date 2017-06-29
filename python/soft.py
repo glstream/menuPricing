@@ -74,12 +74,15 @@ def drawWords(my_papirus, printstring, fontsize, dims):
     my_papirus.update()
 
 
+t1 = 1
 
-
-
+if (t1 == 1):
 
     printString = str(product['price'])
 
+    if len(printString) > 40:
+        print 'WARNING: string length is too large for single line printing, truncating at 40 chars'
+        printString = printString[0:40]
 
     rot = '0'
     my_papirus = Papirus(rotation = int(rot))
@@ -88,6 +91,7 @@ def drawWords(my_papirus, printstring, fontsize, dims):
     drawWords(my_papirus, printString, fontsize, dims)
     print "Finished!"
 
-
+else:
+    print "Usage: " + sys.argv[0] + " \"text to display\" [rotation]"
 
 
