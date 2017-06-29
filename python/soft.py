@@ -92,6 +92,6 @@ if (len(sys.argv) >= 2):
     print "Finished!"
 
 else:
-    print "Usage: " + product['price'] + " \"text to display\" [rotation]"
+    print "Usage: " + str(product['price']) + " \"text to display\" [rotation]"
 
 
