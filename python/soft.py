@@ -75,7 +75,7 @@ def drawWords(my_papirus, printstring, fontsize, dims):
 
     printString = str(product['price'])
 
-    rot = sys.argv[2] if len(sys.argv) >= 3 else '0'
+    rot = printString if len(sys.argv) >= 3 else '0'
     my_papirus = Papirus(rotation = int(rot))
     fontsize, dims= getFontSize(my_papirus, printString)
     print "Writing to Papirus...."
