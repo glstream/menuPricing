@@ -78,16 +78,16 @@ def drawWords(my_papirus, printstring, fontsize, dims):
 
 
 
-    printString = str(product['price'])
+printString = str(product['price'])
 
-  
+rot = printString
 
-    rot = printString
-    my_papirus = Papirus(rotation = int(rot))
-    fontsize, dims= getFontSize(my_papirus, printString)
-    print "Writing to Papirus...."
-    drawWords(my_papirus, printString, fontsize, dims)
-    print "Finished!"
+my_papirus = Papirus(rotation = int(rot))
+
+fontsize, dims= getFontSize(my_papirus, printString)
+print "Writing to Papirus...."
+drawWords(my_papirus, printString, fontsize, dims)
+print "Finished!"
 
 
 
