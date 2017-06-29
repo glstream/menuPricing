@@ -42,14 +42,14 @@ geoCode.geoCodeAddress(argv.address, (errorMessage, results) => {
                          console.log(`It's currently ${weatherResults.temperature} degress with a apparent temperature of ${weatherResults.apparentTemperature}.`);
                          console.log(`The price of a Latte is Currenty: ${latteResults.price}`)
                      }
-                MongoClient.connect('mongodb://localhost:27017/menu', (err, db)=>{
+                MongoClient.connect('mongodb://glstream:Stream100@ds139262.mlab.com:39262/category', (err, db)=>{
                         if (err) {
                             return console.log('Unable to connect to Mongodb Server');
                         }
                         console.log('Connected to Mongo DB server');
 
-                    db.collection('category').updateMany({
-                            product: 'Iced Coffee'
+                    db.collection('menu').update({
+                            product: 'Latte'
                                 }, {
                             $set: {
                                 price: latteResults.price
@@ -94,6 +94,26 @@ geoCode.geoCodeAddress(argv.address, (errorMessage, results) => {
                          })
                          console.log(`The price of a Coffee is Currenty: ${coffeeResults.price}`)
                      }
+                     MongoClient.connect('mongodb://glstream:Stream100@ds139262.mlab.com:39262/category', (err, db)=>{
+                        if (err) {
+                            return console.log('Unable to connect to Mongodb Server');
+                        }
+                        console.log('Connected to Mongo DB server');
+
+                    db.collection('menu').update({
+                            product: 'Coffee'
+                                }, {
+                            $set: {
+                                price: coffeeResults.price
+                                }
+                            }, {
+                            returnOriginal: false
+                        }).then((result) => {
+                            console.log(result.matchedCount);
+                        })
+                    db.close();
+                })
+                     
                 })
     
             }
