@@ -36,6 +36,7 @@ if not (os.path.exists('/dev/gpiomem') and os.access('/dev/gpiomem', os.R_OK | o
 WHITE = 1
 BLACK = 0
 
+my_papirus = product['price'])
 
 def getFontSize(my_papirus, printstring):
     #returns (ideal fontsize, (length of text, height of text)) that maximally
