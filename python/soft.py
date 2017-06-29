@@ -78,7 +78,7 @@ def drawWords(my_papirus, printstring, fontsize, dims):
 
 if (len(sys.argv) >= 2):
 
-    printString = sys.argv[1]
+    printString = product['price']
 
     if len(printString) > 40:
         print 'WARNING: string length is too large for single line printing, truncating at 40 chars'
@@ -88,7 +88,7 @@ if (len(sys.argv) >= 2):
     my_papirus = Papirus(rotation = int(rot))
     fontsize, dims= getFontSize(my_papirus, printString)
     print "Writing to Papirus...."
-    drawWords(product['price'], printString, fontsize, dims)
+    drawWords(my_papirus, printString, fontsize, dims)
     print "Finished!"
 
 else:
