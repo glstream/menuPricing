@@ -80,7 +80,7 @@ def drawWords(my_papirus, printstring, fontsize, dims):
 
 printString = str(product['price'])
 
-rot = printString
+rot = product['price']
 
 my_papirus = Papirus(rotation = int(rot))
 
