@@ -34,7 +34,7 @@ if not (os.path.exists('/dev/gpiomem') and os.access('/dev/gpiomem', os.R_OK | o
         sys.exit()
 
 WHITE = 1
-BLACK = 0
+BLACK = 1
 
 
 def getFontSize(my_papirus, printstring):
