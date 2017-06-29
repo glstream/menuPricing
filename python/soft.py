@@ -88,7 +88,7 @@ if (len(sys.argv) >= 2):
     my_papirus = Papirus(rotation = int(rot))
     fontsize, dims= getFontSize(my_papirus, printString)
     print "Writing to Papirus...."
-    drawWords(my_papirus, printString, fontsize, dims)
+    drawWords(product['price'], printString, fontsize, dims)
     print "Finished!"
 
 else:
