@@ -33,8 +33,8 @@ if not (os.path.exists('/dev/gpiomem') and os.access('/dev/gpiomem', os.R_OK | o
         print("Please run script as root")
         sys.exit()
 
-WHITE = 0
-BLACK = 1
+WHITE = 1
+BLACK = 0
 
 
 def getFontSize(my_papirus, printstring):
