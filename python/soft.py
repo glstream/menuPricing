@@ -36,7 +36,6 @@ if not (os.path.exists('/dev/gpiomem') and os.access('/dev/gpiomem', os.R_OK | o
 WHITE = 1
 BLACK = 0
 
-my_papirus = product['price'])
 
 def getFontSize(my_papirus, printstring):
     #returns (ideal fontsize, (length of text, height of text)) that maximally
@@ -71,7 +70,7 @@ def drawWords(my_papirus, printstring, fontsize, dims):
 
     draw.text(((my_papirus.width-dims[0])/2, (my_papirus.height/2) - (dims[1]/2)), printstring, font=font, fill=BLACK)
 
-    my_papirus.display(image)
+    my_papirus.display(image, '-')
     my_papirus.update()
 
 
