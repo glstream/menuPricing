@@ -68,7 +68,7 @@ def drawWords(my_papirus, printstring, fontsize, dims):
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype('/usr/share/fonts/truetype/droid/DroidSans-Bold.ttf', fontsize)
 
-    draw.text(((my_papirus.width-dims[0])/2, (my_papirus.height/2) - (dims[1]/2)), printstring, font=font, fill=BLACK)
+    draw.text(((my_papirus.width-dims[0])/2, (my_papirus.height/2) - (dims[1]/2)), printstring, font=font, fill=WHITE)
 
     my_papirus.display(image)
     my_papirus.update()
