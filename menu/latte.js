@@ -1,15 +1,15 @@
 
 var latte = (temperature, callback) => {
    if (temperature > 90) {
-       price = 5.11
+       price = 6.11
    } else if (temperature > 80){
-       price = 5.16
+       price = 6.16
    } else if (temperature > 70){
-       price = 5.21
+       price = 6.21
    } else if (temperature > 60){
-       price = 5.24
+       price = 6.24
    } else if (temperature > 50){
-       price = 6.00
+       price = 7.00
    } else {
        price = 4.95
    }
