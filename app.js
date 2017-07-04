@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 
 
 cron.schedule('* * * * *', function(){
-zip = '85001'
+zip = '98103'
     geoCode.geoCodeAddress(zip, (errorMessage, results) => {
     if (errorMessage) {
         console.log(errorMessage)
@@ -35,6 +35,7 @@ zip = '85001'
                          console.log(`It's currently ${weatherResults.temperature} degress with a apparent temperature of ${weatherResults.apparentTemperature}.`);
                          console.log(`The price of a Latte is Currenty: ${latteResults.price}`)
                      }
+                     
                 MongoClient.connect('mongodb://glstream:Stream100@ds139262.mlab.com:39262/category', (err, db)=>{
                         if (err) {
                             return console.log('Unable to connect to Mongodb Server');
