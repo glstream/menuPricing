@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 
 
 
-cron.schedule('00 */25 * * * *', function(){
+cron.schedule('00 * * * * *', function(){
 zip = '98116'
     geoCode.geoCodeAddress(zip, (errorMessage, results) => {
     if (errorMessage) {
