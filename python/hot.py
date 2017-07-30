@@ -14,7 +14,7 @@ db.authenticate('glstream', 'Stream100')
 menu = db.menu
 
 
-product = menu.find_one({'product': 'Latte'})
+product = menu.find_one({'product': 'Coffee'})
 
 print(product['price'])
 
